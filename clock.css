@@ -1,0 +1,441 @@
+html, body {
+  height: 100%;
+  margin: 0;    
+}
+
+
+body{
+  text-align: center;
+  background-image: url("bg-image.jpg");
+}
+
+h1 {
+  margin-top:7rem;
+  font-size: 5rem;
+  color: #b28cff;   /* pastel violet */
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 
+    0 0 5px #b28cff,  
+    0 0 15px #9c6de9; 
+  font-family:'Cinzel', serif; 
+}
+
+h2{
+  margin:2rem;
+  font-size: 2rem;
+  color: #b28cff;   /* pastel violet */
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 
+    0 0 5px #b28cff,  
+    0 0 15px #9c6de9; 
+  font-family:'Cinzel', serif; 
+
+}
+
+.tittle-input {
+  width: 80%;
+  max-width: 400px;
+  height: 3rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+  color: #00ffff;           
+  background-color: rgba(30, 30, 50, 0.8); 
+
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #ff77ff;          
+  box-shadow: 0 0 15px #b28cff, 0 0 30px #ff77ff;
+}
+
+input[type="text"]:hover {
+  border-color: #d9a1ff;
+  box-shadow: 0 0 10px #b28cff;
+}
+
+input[type="text"] {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+input[type="text"]:hover {
+  border-color: #d9a1ff;
+  box-shadow: 0 0 10px #b28cff;
+}
+
+.add-timer{
+  text-align: center;
+  display: inline;
+  border-radius: 100%;
+  margin: 10px;
+}
+
+.main-clock{
+  height: 10rem;
+  width: 40rem; 
+  border: 2px solid #b28cff;             
+  margin: auto;  
+  margin-top:10px;     
+  padding: 20px;
+  background-color: rgba(20, 20, 50, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(156, 109, 233, 0.6);
+  text-align: center;  
+  transition: all 0.3s ease; 
+}
+
+.main-clock:hover{
+  border-color: #d9a1ff;
+  box-shadow: 0 0 10px #b28cff;
+}
+
+.time-display {
+  font-size: 4rem;
+  color: #00ffff;
+  text-shadow: 
+    0 0 8px #00ffff,
+    0 0 16px #7a5cff, 
+    0 0 24px #b28cff,
+    0 0 40px #d9a1ff;
+}
+
+
+
+.control-buttons{
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+
+
+}
+
+.start-button,
+.pause-button,
+.reset-button{
+   margin:0.5rem;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #e0e0e0;                    
+  background-color: rgba(30, 30, 50, 0.8); 
+  border: 2px solid #b28cff;         
+  border-radius: 0.5rem;
+  cursor: pointer;                   
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+button:hover,
+button:focus {
+  border-color: #d9a1ff; 
+  box-shadow: 0 0 10px #b28cff, 0 0 25px #ff77ff;
+  transform: scale(1.05);         
+  outline: none;
+}
+
+.input-wrapper {
+  display: flex;
+  justify-content: center;  /* centers input + button */
+  align-items: center;
+  gap: 0.9rem;             /* spacing between input and + button */
+  margin-top: 2rem;        /* space from timer above */
+  width: 100%;
+}
+
+.input-wrapper input[type="text"] {
+  flex: 1;                  /* input takes available space */
+  height: 3rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+  color: #00ffff;
+  background-color: rgba(30, 30, 50, 0.8);
+  border: 2px solid #b28cff;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-wrapper input[type="text"]:focus {
+  border-color: #ff77ff;
+  box-shadow: 0 0 10px #b28cff, 0 0 25px #ff77ff;
+}
+
+/* + button */
+.add {
+  width: 3rem;              /* circular button */
+  height: 3rem;
+  font-size: 1.5rem;
+  padding: 0;
+  color: #e0e0e0;
+  background-color: rgba(30, 30, 50, 0.8);
+  border: 2px solid #b28cff;
+  border-radius: 50%;       /* makes it circular */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add:hover,
+.add:focus {
+  border-color: #ff77ff;
+  box-shadow: 0 0 10px #b28cff, 0 0 25px #ff77ff;
+  transform: scale(1.1);
+  outline: none;
+}
+
+
+/* ===== Modal Overlay (background blur layer) ===== */
+.modal {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  position: fixed;
+  inset: 0; /* top:0 right:0 bottom:0 left:0 */
+  background: rgba(0, 0, 0, 0.6); /* dark overlay */
+  backdrop-filter: blur(6px);     /* blur background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* ===== Modal Box ===== */
+.modal-content {
+  background: rgba(20, 20, 35, 0.95);
+  padding: 2rem;
+  width: min(90%, 400px);
+  border-radius: 1rem;
+  border: 2px solid #b28cff;
+  box-shadow: 0 0 20px rgba(178, 140, 255, 0.4);
+  color: #e0e0e0;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ===== Heading ===== */
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #ff77ff;
+  text-shadow: 0 0 8px rgba(255, 119, 255, 0.6);
+}
+
+/* ===== Labels ===== */
+.modal-content label {
+  display: block;
+  margin: 0.8rem 0 0.3rem;
+  font-size: 0.9rem;
+  color: #cfcfff;
+}
+
+/* ===== Input & Select ===== */
+.select-hours,.select-minutes,.select-seconds {
+  margin-top: 2rem;
+  gap:1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  width: 10%;
+  height: 2.8rem;
+  padding: 0 0.8rem;
+  background: rgba(30, 30, 50, 0.85);
+  color: #00ffff;
+  border: 2px solid #b28cff;
+  border-radius: 0.5rem;
+  outline: none;
+  margin-bottom: 0.8rem;
+  transition: 0.3s ease;
+}
+
+.modal-content select{
+  margin-top: 2rem;
+  gap:1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  width: 30%;
+  height: 2.8rem;
+  padding: 0 0.8rem;
+  background: rgba(30, 30, 50, 0.85);
+  color: #00ffff;
+  border: 2px solid #b28cff;
+  border-radius: 0.5rem;
+  outline: none;
+  margin-bottom: 0.8rem;
+  transition: 0.3s ease;
+}
+
+.countdown-title{
+  margin-top: 2rem;
+  gap:1.5rem;
+  font-size: 1rem;
+  width: 100%;
+  height: 2.8rem;
+  padding: 0 0.8rem;
+  background: rgba(30, 30, 50, 0.85);
+  color: #00ffff;
+  border: 2px solid #b28cff;
+  border-radius: 0.5rem;
+  outline: none;
+  margin-bottom: 0.8rem;
+  transition: 0.3s ease;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  border-color: #ff77ff;
+  box-shadow: 0 0 10px #b28cff, 0 0 20px #ff77ff;
+}
+
+/* ===== Duration Select Row ===== */
+.modal-content select {
+  margin-right: 0.3rem;
+}
+
+/* ===== Buttons ===== */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+.modal-buttons button {
+  flex: 1;
+  height: 2.8rem;
+  background: rgba(30, 30, 50, 0.9);
+  color: #e0e0e0;
+  border: 2px solid #b28cff;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-buttons button:hover {
+  border-color: #ff77ff;
+  box-shadow: 0 0 10px #b28cff, 0 0 20px #ff77ff;
+  transform: scale(1.05);
+}
+
+/* Cancel button slightly dimmer */
+#modal-cancel {
+  opacity: 0.8;
+}
+
+/* ===== Fade animation ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.current-task-display {
+  display: inline-block;              /* border fits text */
+  padding: 6px 14px;
+  margin-top: 12px;
+
+  color: #d8c8ff;                      /* soft lavender */
+  font-size: 18px;
+  font-weight: 500;
+
+  border: 1px solid rgba(178, 140, 255, 0.45);  /* subtle border */
+  border-radius: 8px;
+
+  background: rgba(20, 16, 35, 0.4);   /* translucent dark */
+
+  box-shadow:
+    0 0 6px rgba(178, 140, 255, 0.25),  /* mild glow */
+    0 4px 12px rgba(0, 0, 0, 0.4);      /* depth */
+
+  letter-spacing: 0.3px;
+}
+
+.timer-controls {
+  margin: 10px 0;
+  font-size: 1.5rem;
+  color: #d8c8ff;
+  font-weight: 500;
+  text-align: center;
+}
+
+.audio-select {
+  margin-top: 2rem;
+  gap:1.5rem;
+  text-align: center;
+  font-size: 20px;
+  width: 10%;
+  height: 2.8rem;
+  padding: 0 0.8rem;
+  background: rgba(30, 30, 50, 0.85);
+  color: #00ffff;
+  border: 2px solid #b28cff;
+  border-radius: 0.5rem;
+  outline: none;
+  margin-bottom: 0.8rem;
+  transition: 0.3s ease;
+}
+
+.audio-select:hover {
+  box-shadow: 0 0 6px rgba(178,140,255,0.3);
+}
+
+.music-icon {
+  color: #d8c8ff;                     /* soft default color */
+  font-size: 20px;
+  font-weight: 600;
+  text-shadow: 0 0 4px rgba(178,140,255,0.3);  /* subtle glow */
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.music-icon:hover {
+  color: #ffffff;                                  /* brighter on hover */
+  text-shadow:
+    0 0 8px rgba(178,140,255,0.8),
+    0 0 10px rgba(178,140,255,0.5),
+    0 0 20px rgba(178,140,255,0.3);              /* multi-layer glow */
+}
+
+.focus-over{
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  position: fixed;
+  inset: 0; /* top:0 right:0 bottom:0 left:0 */
+  background: rgba(0, 0, 0, 0.6); /* dark overlay */
+  backdrop-filter: blur(6px);     /* blur background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.focus-over button{
+  flex: 1;
+  height: 2.8rem;
+  background: rgba(30, 30, 50, 0.9);
+  color: #e0e0e0;
+  border: 2px solid #b28cff;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 20%;
+}
+
+.focus-over button:hover {
+  border-color: #ff77ff;
+  box-shadow: 0 0 10px #b28cff, 0 0 20px #ff77ff;
+  transform: scale(1.05);
+}
+
+.image{
+  margin:5rem 1rem 1rem 1rem;
+  height:400px;
+  width:20%;
+  border-radius: 20%;
+  border:5px solid #b28cff;
+  box-shadow: 0 0 10px #b28cff, 0 0 10px #ff77ff;
+}
